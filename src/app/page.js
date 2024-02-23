@@ -1,12 +1,9 @@
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCoffee } from "@fortawesome/free-solid-svg-icons";
-
-export default function Home() {
+const Home = () => {
   return (
-    <div>
-      <h1>Home</h1>
-      <p>Home page content</p>
-      <FontAwesomeIcon icon={faCoffee} />
-    </div>
-  );
+    <section className="w-full flex justify-center items-center flex-col">
+      <h1 className="mt-5 text-5xl font-extrabold leading-[1.15] text-black sm:text-6xl text-center">Find and Share</h1>
+    </section>
+  )
 }
+
+export default Home;
