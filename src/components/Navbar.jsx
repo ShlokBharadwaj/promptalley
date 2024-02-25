@@ -2,13 +2,16 @@
 
 import Link from "next/link";
 import Image from "next/image";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useState, useEffect } from "react";
 import { signIn, signOut, useSession, getProviders } from "next-auth/react";
+import { faBars } from "@fortawesome/free-solid-svg-icons";
 
 const Navbar = () => {
 
   const [isUserLoggedIn, setIsUserLoggedIn] = useState(true);
   const [providers, setProviders] = useState(null);
+  const [toggleDropdown, setToggleDropdown] = useState(false);
 
   useEffect(() => {
     const setProviders = async () => {
@@ -35,7 +38,7 @@ const Navbar = () => {
       </Link>
 
       {/* Desktop */}
-      <div className="sm:flex hidden">
+      <div className="hidden sm:flex">
         {isUserLoggedIn ? (
           <div className="flex gap-3 md:gap-5">
             <Link
@@ -80,7 +83,59 @@ const Navbar = () => {
       </div>
 
       {/* Mobile */}
-      <div></div>
+      <div className="sm:hidden flex relative">
+        {isUserLoggedIn ? (
+          <div className="flex">
+            <FontAwesomeIcon
+              icon={faBars}
+              className="text-white text-2xl"
+              onClick={() => { setToggleDropdown((prev) => !prev) }}
+            />
+
+            {toggleDropdown && (
+              <div className="absolute right-0 top-full mt-3 w-full p-5 rounded-lg bg-white min-w-[210px] flex flex-col gap-2 justify-end items-end">
+                <Link
+                  href={"/profile"}
+                  className="text-sm font-inter text-gray-700 hover:text-gray-500 font-medium"
+                  onClick={() => { setToggleDropdown(false) }}
+                >
+                  My Profile
+                </Link>
+                <Link
+                  href={"/create-prompt"}
+                  className="text-sm font-inter text-gray-700 hover:text-gray-500 font-medium"
+                  onClick={() => { setToggleDropdown(false) }}
+                >
+                  Create Post
+                </Link>
+                <button
+                  type="button"
+                  onClick={() => {
+                    setToggleDropdown(false);
+                    signOut();
+                  }}
+                  className="text-sm font-inter text-gray-700 hover:text-gray-500 font-medium"
+                >Sign Out
+                </button>
+              </div>
+            )}
+          </div>
+        ) : (
+          <>
+            {providers && Object.values(providers).map((provider) => (
+              <div key={provider.name}>
+                <button
+                  type="button"
+                  onClick={() => signIn(provider.id)}
+                  className="text-white font-semibold hover:text-gray-300 text-center items-center justify-center px-4 py-2 border border-transparent rounded-md shadow-sm"
+                >Sign In with {provider.name}
+                </button>
+              </div>
+            ))
+            }
+          </>
+        )}
+      </div>
     </nav>
   )
 }
