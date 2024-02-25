@@ -10,29 +10,30 @@ import { faBars } from "@fortawesome/free-solid-svg-icons";
 const Navbar = () => {
 
   const [isUserLoggedIn, setIsUserLoggedIn] = useState(true);
-  const [providers, setProviders] = useState(null);
+  // const [providers, setProviders] = useState(null);
   const [toggleDropdown, setToggleDropdown] = useState(false);
 
-  useEffect(() => {
-    const setProviders = async () => {
-      const response = await getProviders();
-      setProviders(response);
-    }
+  // useEffect(() => {
+  //   const setProviders = async () => {
+  //     const response = await getProviders();
+  //     setProviders(response);
+  //   }
 
-    setProviders();
-  }, [])
+  //   setProviders();
+  // }, [])
 
   return (
     <nav className="flex justify-between items-center w-full mb-0 pt-0">
       <Link
         href={"/"}
-        className="flex justify-center items-center gap-2"
+        className="flex justify-center items-center gap-2 ml-[-10%] sm:ml-0"
       >
         <Image
           src={"/assets/images/promptalley-logos_white.png"}
           width={160}
           height={160}
-          className="bg-contain w-44 h-44 -my-8"
+          className="bg-contain w-full sm:w-44 h-full sm:h-44 -my-8"
+          alt="PromptAlley Logo"
         >
         </Image>
       </Link>
@@ -122,7 +123,7 @@ const Navbar = () => {
           </div>
         ) : (
           <>
-            {providers && Object.values(providers).map((provider) => (
+            {/* {providers && Object.values(providers).map((provider) => (
               <div key={provider.name}>
                 <button
                   type="button"
@@ -132,7 +133,7 @@ const Navbar = () => {
                 </button>
               </div>
             ))
-            }
+            } */}
           </>
         )}
       </div>
