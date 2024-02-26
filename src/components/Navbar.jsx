@@ -26,7 +26,7 @@ const Navbar = () => {
     <nav className="flex justify-between items-center w-full mb-0 pt-0">
       <Link
         href={"/"}
-        className="flex justify-center items-center gap-2 ml-[-10%] sm:ml-0"
+        className="flex justify-center items-center gap-2 ml-[-14%] sm:ml-0"
       >
         <Image
           src={"/assets/images/promptalley-logos_white.png"}
@@ -94,7 +94,7 @@ const Navbar = () => {
             />
 
             {toggleDropdown && (
-              <div className="absolute right-0 top-full mt-3 w-full p-5 rounded-lg bg-white min-w-[210px] flex flex-col gap-2 justify-end items-end">
+              <div className="absolute right-0 top-full mt-3 w-full p-5 rounded-lg bg-white min-w-[175px] flex flex-col gap-2 justify-end items-end">
                 <Link
                   href={"/profile"}
                   className="text-sm font-inter text-gray-700 hover:text-gray-500 font-medium"
