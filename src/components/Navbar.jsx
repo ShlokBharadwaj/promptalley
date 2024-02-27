@@ -9,18 +9,19 @@ import { faBars } from "@fortawesome/free-solid-svg-icons";
 
 const Navbar = () => {
 
-  const [isUserLoggedIn, setIsUserLoggedIn] = useState(true);
-  // const [providers, setProviders] = useState(null);
+  const { data: session } = useSession();
+
+  const [providers, setProviders] = useState(null);
   const [toggleDropdown, setToggleDropdown] = useState(false);
 
-  // useEffect(() => {
-  //   const setProviders = async () => {
-  //     const response = await getProviders();
-  //     setProviders(response);
-  //   }
+  useEffect(() => {
+    const setUpProviders = async () => {
+      const response = await getProviders();
+      setProviders(response);
+    }
 
-  //   setProviders();
-  // }, [])
+    setUpProviders();
+  }, [])
 
   return (
     <nav className="flex justify-between items-center w-full mb-0 pt-0">
@@ -40,7 +41,7 @@ const Navbar = () => {
 
       {/* Desktop */}
       <div className="hidden sm:flex">
-        {isUserLoggedIn ? (
+        {session?.user ? (
           <div className="flex gap-3 md:gap-5">
             <Link
               href={"/create-prompt"}
@@ -57,7 +58,7 @@ const Navbar = () => {
               href={"/profile"}
             >
               <Image
-                src={"/assets/images/promptalley-logos.jpeg"}
+                src={session.user.image}
                 width={37}
                 height={37}
                 className="rounded-full"
@@ -85,7 +86,7 @@ const Navbar = () => {
 
       {/* Mobile */}
       <div className="sm:hidden flex relative">
-        {isUserLoggedIn ? (
+        {session?.user ? (
           <div className="flex">
             <FontAwesomeIcon
               icon={faBars}
@@ -123,7 +124,7 @@ const Navbar = () => {
           </div>
         ) : (
           <>
-            {/* {providers && Object.values(providers).map((provider) => (
+            {providers && Object.values(providers).map((provider) => (
               <div key={provider.name}>
                 <button
                   type="button"
@@ -133,7 +134,7 @@ const Navbar = () => {
                 </button>
               </div>
             ))
-            } */}
+            }
           </>
         )}
       </div>
