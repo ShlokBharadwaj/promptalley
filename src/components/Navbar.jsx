@@ -5,7 +5,8 @@ import Image from "next/image";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useState, useEffect } from "react";
 import { signIn, signOut, useSession, getProviders } from "next-auth/react";
-import { faBars } from "@fortawesome/free-solid-svg-icons";
+import { faBars, faChevronDown } from "@fortawesome/free-solid-svg-icons";
+
 
 const Navbar = () => {
 
@@ -13,6 +14,7 @@ const Navbar = () => {
 
   const [providers, setProviders] = useState(null);
   const [toggleDropdown, setToggleDropdown] = useState(false);
+  const [showSignInDropdown, setShowSignInDropdown] = useState(false);
 
   useEffect(() => {
     const setUpProviders = async () => {
@@ -24,16 +26,23 @@ const Navbar = () => {
   }, [])
 
   const renderProviderButtons = () => (
-    providers && Object.values(providers).map((provider) => (
-      <div key={provider.name}>
-        <button
-          type="button"
-          onClick={() => signIn(provider.id)}
-          className="text-white font-semibold hover:text-gray-300 text-center items-center justify-center px-4 py-2 border border-transparent rounded-md shadow-sm"
-        >Sign In with {provider.name}
-        </button>
+    providers && (
+      <div className="absolute right-0 mt-2 py-2 w-48 bg-white rounded-md shadow-xl z-20">
+        {Object.values(providers).map((provider) => (
+          <button
+            key={provider.name}
+            type="button"
+            onClick={() => {
+              signIn(provider.id)
+              setShowSignInDropdown((prev) => !prev);
+            }}
+            className="block px-4 py-2 text-sm capitalize text-gray-700 hover:text-gray-500"
+          >
+            Sign In with {provider.name}
+          </button>
+        ))}
       </div>
-    ))
+    )
   );
 
   return (
@@ -81,7 +90,17 @@ const Navbar = () => {
             </Link>
           </div>
         ) : (
-          renderProviderButtons()
+          <div className="relative">
+            <button
+              type="button"
+              onClick={() => setShowSignInDropdown((prev) => !prev)}
+              className="text-white font-semibold hover:text-gray-300 text-center items-center justify-center px-4 py-2 border border-transparent rounded-md shadow-sm flex"
+            >
+              Sign In
+              <FontAwesomeIcon icon={faChevronDown} className="ml-2" />
+            </button>
+            {showSignInDropdown && renderProviderButtons()}
+          </div>
         )
         }
       </div>
@@ -125,7 +144,17 @@ const Navbar = () => {
             )}
           </div>
         ) : (
-          renderProviderButtons()
+          <div className="relative">
+            <button
+              type="button"
+              onClick={() => setShowSignInDropdown((prev) => !prev)}
+              className="text-white font-semibold hover:text-gray-300 text-center items-center justify-center px-4 py-2 border border-transparent rounded-md shadow-sm flex"
+            >
+              Sign In
+              <FontAwesomeIcon icon={faChevronDown} className="ml-2" />
+            </button>
+            {showSignInDropdown && renderProviderButtons()}
+          </div>
         )}
       </div>
     </nav>
