@@ -6,6 +6,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useState, useEffect } from "react";
 import { signIn, signOut, useSession, getProviders } from "next-auth/react";
 import { faBars, faChevronDown } from "@fortawesome/free-solid-svg-icons";
+import { faGithub, faGoogle } from "@fortawesome/free-brands-svg-icons";
 
 
 const Navbar = () => {
@@ -25,6 +26,17 @@ const Navbar = () => {
     setUpProviders();
   }, [])
 
+  const getProviderIcon = (providerName) => {
+    switch (providerName.toLowerCase()) {
+      case 'google':
+        return faGoogle;
+      case 'github':
+        return faGithub;
+      default:
+        return null;
+    }
+  }
+
   const renderProviderButtons = () => (
     providers && (
       <div className="absolute right-0 mt-2 py-2 w-48 bg-white rounded-md shadow-xl z-20">
@@ -38,6 +50,7 @@ const Navbar = () => {
             }}
             className="block px-4 py-2 text-sm capitalize text-gray-700 hover:text-gray-500"
           >
+            <FontAwesomeIcon icon={getProviderIcon(provider.name)} className="mr-2" />
             Sign In with {provider.name}
           </button>
         ))}
