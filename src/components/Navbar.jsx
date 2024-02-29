@@ -23,6 +23,19 @@ const Navbar = () => {
     setUpProviders();
   }, [])
 
+  const renderProviderButtons = () => (
+    providers && Object.values(providers).map((provider) => (
+      <div key={provider.name}>
+        <button
+          type="button"
+          onClick={() => signIn(provider.id)}
+          className="text-white font-semibold hover:text-gray-300 text-center items-center justify-center px-4 py-2 border border-transparent rounded-md shadow-sm"
+        >Sign In with {provider.name}
+        </button>
+      </div>
+    ))
+  );
+
   return (
     <nav className="flex justify-between items-center w-full mb-0 pt-0">
       <Link
@@ -67,20 +80,9 @@ const Navbar = () => {
               </Image>
             </Link>
           </div>
-        ) :
-          <>
-            {providers && Object.values(providers).map((provider) => (
-              <div key={provider.name}>
-                <button
-                  type="button"
-                  onClick={() => signIn(provider.id)}
-                  className="text-white font-semibold hover:text-gray-300 text-center items-center justify-center px-4 py-2 border border-transparent rounded-md shadow-sm"
-                >Sign In with {provider.name}
-                </button>
-              </div>
-            ))
-            }
-          </>
+        ) : (
+          renderProviderButtons()
+        )
         }
       </div>
 
@@ -123,19 +125,7 @@ const Navbar = () => {
             )}
           </div>
         ) : (
-          <>
-            {providers && Object.values(providers).map((provider) => (
-              <div key={provider.name}>
-                <button
-                  type="button"
-                  onClick={() => signIn(provider.id)}
-                  className="text-white font-semibold hover:text-gray-300 text-center items-center justify-center px-4 py-2 border border-transparent rounded-md shadow-sm"
-                >Sign In with {provider.name}
-                </button>
-              </div>
-            ))
-            }
-          </>
+          renderProviderButtons()
         )}
       </div>
     </nav>
