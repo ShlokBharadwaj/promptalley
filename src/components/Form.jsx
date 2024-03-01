@@ -31,18 +31,29 @@ const Form = ({ type, post, setPost, submitting, handleSubmit }) => {
         </label>
         <label className="mt-2">
           <span className="font-satoshi font-semibold text-base">
-            Tag
+            Tag&nbsp;
             <span className="text-xs text-gray-500 ml-2">(#web #lifestyle)</span>
           </span>
-          <textarea
+          <input
             value={post.tag}
-            onChange={(e) => setPost({ ...tag, tag: e.target.value })}
-            className="w-full max-w-full h-32 p-2 mt-4 text-base rounded-md bg-transparent resize-none outline-none text-center ring-2 ring-[#a8dadc] ring-opacity-20"
-            placeholder="What's on your mind?"
+            onChange={(e) => setPost({ ...post, tag: e.target.value })}
+            className="w-full max-w-full p-2 mt-4 text-base rounded-md bg-transparent outline-none text-center ring-2 ring-[#a8dadc] ring-opacity-20"
+            placeholder="Add a tag to your post"
             required
           />
-
         </label>
+        <div className="flex justify-end items-center mx-3 mb-5 gap-4 mt-4">
+          <Link href={"/"}
+            className="text-sm"
+          >
+            Cancel
+          </Link>
+          <button
+            type="submit"
+            disabled={submitting}
+            className="w-24 h-10 text-white bg-gradient-to-r from-[#457b9d] to-[#a8dadc] rounded-md hover:from-[#a8dadc] hover:to-[#457b9d] focus:outline-none focus:ring-2 focus:ring-[#a8dadc] focus:ring-opacity-50 transition duration-300 ease-in-out focus:scale-95 hover:scale-105"
+          >{submitting ? `${type}...` : type}</button>
+        </div>
       </form>
     </section>
   )
