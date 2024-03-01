@@ -94,9 +94,9 @@
   @apply bg-gradient-to-r from-green-400 to-green-500 bg-clip-text text-transparent;
 }
 
-.blue_gradient {
+/* .blue_gradient {
   @apply bg-gradient-to-r from-blue-600 to-cyan-600 bg-clip-text text-transparent;
-}
+} */
 
 .desc {
   @apply mt-5 text-lg text-gray-600 sm:text-xl max-w-2xl;
@@ -154,9 +154,9 @@
   @apply flex justify-center items-center;
 } */
 
-.flex-start {
+/* .flex-start {
   @apply flex justify-start items-start;
-}
+} */
 
 .flex-end {
   @apply flex justify-end items-center;

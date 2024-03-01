@@ -50,7 +50,7 @@ const Navbar = () => {
             }}
             className="block px-4 py-2 text-sm capitalize text-gray-700 hover:text-gray-500"
           >
-            <FontAwesomeIcon icon={getProviderIcon(provider.name)} className="mr-2" />
+            <FontAwesomeIcon icon={getProviderIcon(provider.name)} className="mr-3" />
             Sign In with {provider.name}
           </button>
         ))}
