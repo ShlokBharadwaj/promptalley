@@ -12,8 +12,11 @@ import { faCopy, faCheck } from "@fortawesome/free-solid-svg-icons";
 const PromptCard = ({ prompt, handleTagClick, handleEdit, handleDelete }) => {
 
   const [copy, setCopy] = useState(false);
+  const { data: session } = useSession();
+  const pathName = usePathname();
+  const router = useRouter();
 
-  const handleCopy = () => { 
+  const handleCopy = () => {
     setCopy(prompt.prompt);
     navigator.clipboard.writeText(prompt.prompt);
     setTimeout(() => {
@@ -56,7 +59,26 @@ const PromptCard = ({ prompt, handleTagClick, handleEdit, handleDelete }) => {
       <p
         className="font-inter text-sm bg-gradient-to-r from-[#eea689]  to-[#eb8b65] bg-clip-text text-transparent text-start"
         onClick={() => handleTagClick && handleTagClick(prompt.tag)}
-      >{prompt.tag}</p>
+      >
+        {prompt.tag}
+      </p>
+
+      {session?.user.id === prompt.creator._id && pathName === '/profile' && (
+        <div className="flex justify-between items-center mt-5">
+          <button
+            className="font-inter text-sm text-gray-400 hover:text-gray-600"
+            onClick={() => handleEdit(prompt)}
+          >
+            Edit
+          </button>
+          <button
+            className="font-inter text-sm text-red-400 hover:text-red-600"
+            onClick={() => handleDelete(prompt.id)}
+          >
+            Delete
+          </button>
+        </div>
+      )}
     </div>
   )
 }
