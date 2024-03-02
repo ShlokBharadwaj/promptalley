@@ -18,7 +18,10 @@ const UserProfile = () => {
             setPosts(data);
         }
 
-        session?.user.id ? fetchPosts() : null;
+        if (session?.user.id) {
+            fetchPosts();
+        }
+
     }, []);
 
     const handleEdit = () => {
