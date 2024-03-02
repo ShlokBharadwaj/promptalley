@@ -6,6 +6,21 @@ import Profile from "@/components/Profile";
 
 const UserProfile = () => {
 
+    const { data: session } = useSession();
+
+    const [posts, setPosts] = useState([]);
+
+    useEffect(() => {
+        const fetchPosts = async () => {
+            const response = await fetch(`/api/users/${session?.user.id}/posts`);
+            const data = await response.json();
+
+            setPosts(data);
+        }
+
+        session?.user.id ? fetchPosts() : null;
+    }, []);
+
     const handleEdit = () => {
     }
 
@@ -16,7 +31,7 @@ const UserProfile = () => {
         <Profile
             name="John Doe"
             desc="I'm a software engineer. I love to code and learn new things. I'm also a fan of open source."
-            data={[]}
+            data={posts}
             handleEdit={handleEdit}
             handleDelete={handleDelete}
         />
