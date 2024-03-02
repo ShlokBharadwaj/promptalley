@@ -4,10 +4,15 @@ import { useState } from "react";
 import Image from "next/image";
 import { useSession } from "next-auth/react";
 import { usePathname, useRouter } from "next/navigation";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 import React from 'react';
+import { faCopy, faCheck } from "@fortawesome/free-solid-svg-icons";
 
 const PromptCard = ({ prompt, handleTagClick, handleEdit, handleDelete }) => {
+
+  const [copy, setCopy] = useState(false);
+
   return (
     <div className="flex-1 break-inside-avoid rounded-lg bg-clip-padding shadow-[inset_10px_-50px_94px_0_rgb(199,199,199,0.2)] backdrop-blur p-6 md:w-[360px] w-full h-fit text-center">
       <div className="flex justify-between items-start gap-5">
@@ -29,7 +34,21 @@ const PromptCard = ({ prompt, handleTagClick, handleEdit, handleDelete }) => {
             </p>
           </div>
         </div>
+        <div
+          className="w-7 h-7 rounded-full bg-white/10 shadow-[inset_10px_-50px_94px_0_rgb(199,199,199,0.2)] backdrop-blur flex items-center justify-center cursor-pointer m-auto"
+          onClick={() => { }}
+        >
+          <FontAwesomeIcon
+            icon={copy ? faCheck : faCopy}
+            size="sm"
+          />
+        </div>
       </div>
+      <p className="my-4 font-satoshi text-sm text-start">{prompt.prompt}</p>
+      <p
+        className="font-inter text-sm bg-gradient-to-r from-[#eea689]  to-[#eb8b65] bg-clip-text text-transparent text-start"
+        onClick={() => handleTagClick && handleTagClick(prompt.tag)}
+      >{prompt.tag}</p>
     </div>
   )
 }
