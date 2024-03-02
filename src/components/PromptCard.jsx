@@ -13,6 +13,14 @@ const PromptCard = ({ prompt, handleTagClick, handleEdit, handleDelete }) => {
 
   const [copy, setCopy] = useState(false);
 
+  const handleCopy = () => { 
+    setCopy(prompt.prompt);
+    navigator.clipboard.writeText(prompt.prompt);
+    setTimeout(() => {
+      setCopy(false);
+    }, 1000);
+  };
+
   return (
     <div className="flex-1 break-inside-avoid rounded-lg bg-clip-padding shadow-[inset_10px_-50px_94px_0_rgb(199,199,199,0.2)] backdrop-blur p-6 md:w-[360px] w-full h-fit text-center">
       <div className="flex justify-between items-start gap-5">
@@ -36,7 +44,7 @@ const PromptCard = ({ prompt, handleTagClick, handleEdit, handleDelete }) => {
         </div>
         <div
           className="w-7 h-7 rounded-full bg-white/10 shadow-[inset_10px_-50px_94px_0_rgb(199,199,199,0.2)] backdrop-blur flex items-center justify-center cursor-pointer m-auto"
-          onClick={() => { }}
+          onClick={handleCopy}
         >
           <FontAwesomeIcon
             icon={copy ? faCheck : faCopy}
