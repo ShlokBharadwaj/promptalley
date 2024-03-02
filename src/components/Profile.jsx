@@ -1,9 +1,9 @@
 import React from 'react';
 
-const Profile = () => {
+const Profiles = ({name, desc, data, handleEdit, handleDelete}) => {
   return (
-    <div>Profile</div>
+    <div>Profiles</div>
   )
 }
 
-export default Profile;
+export default Profiles;
