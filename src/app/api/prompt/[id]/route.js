@@ -1,7 +1,7 @@
 import { connectToDatabase } from '@/utils/database';
 import Prompt from "@/models/prompt";
 
-export const GET = async (req, res, { params }) => {
+export const GET = async (req, { params }) => {
     try {
         await connectToDatabase();
 
@@ -17,13 +17,14 @@ export const GET = async (req, res, { params }) => {
             status: 200,
         })
     } catch (error) {
+        console.log("The error for GET request is: ", error);
         return new Response("Failed to fetch prompts", {
             status: 500,
         })
     }
 }
 
-export const PATCH = async (req, res, { params }) => {
+export const PATCH = async (req, { params }) => {
     const { prompt, tag } = await req.json();
 
     try {
@@ -52,7 +53,7 @@ export const PATCH = async (req, res, { params }) => {
     }
 }
 
-export const DELETE = async (req, res, { params }) => {
+export const DELETE = async (req, { params }) => {
     try {
         await connectToDatabase();
 
