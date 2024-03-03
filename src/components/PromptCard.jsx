@@ -60,7 +60,7 @@ const PromptCard = ({ prompt, handleTagClick, handleEdit, handleDelete }) => {
         className="font-inter text-sm bg-gradient-to-r from-[#eea689]  to-[#eb8b65] bg-clip-text text-transparent text-start"
         onClick={() => handleTagClick && handleTagClick(prompt.tag)}
       >
-        {prompt.tag}
+        {prompt.tag.split(' ').map(tag => tag.startsWith('#') ? tag : '#' + tag).join(' ')}
       </p>
 
       {session?.user.id === prompt.creator._id && pathName === '/profile' && (
