@@ -10,7 +10,7 @@ const Profiles = ({ name, desc, data, handleEdit, handleDelete }) => {
         </span>
         's Profile
       </h1>
-      <p className="mt-5 text-lg sm:text-xl max-w-2xl">{desc}</p>
+      <p className="mt-5 text-lg sm:text-xl max-w-full text-center">{desc}</p>
       <div className="mt-16 space-y-6 py-8 sm:columns-2 xl:columns-3 sm:gap-6 items-center justify-center">
         {data.map((prompt) => (
           <PromptCard

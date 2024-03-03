@@ -47,8 +47,8 @@ const UserProfile = () => {
 
     return (
         <Profile
-            name="John Doe"
-            desc="I'm a software engineer. I love to code and learn new things. I'm also a fan of open source."
+            name={session?.user.name}
+            desc={"Welcome to your profile page. Here you can view and manage your prompts."}
             data={posts}
             handleEdit={handleEdit}
             handleDelete={handleDelete}

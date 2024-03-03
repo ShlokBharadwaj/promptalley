@@ -2,9 +2,9 @@ import Link from "next/link";
 
 const Form = ({ type, post, setPost, submitting, handleSubmit }) => {
   return (
-    <section className="w-full max-w-full flex flex-col justify-center items-center">
+    <section className="w-full max-w-full flex flex-col justify-center items-center text-center">
       <h1 className="mt-5 text-5xl font-extrabold leading-[1.15] sm:text-6xl">
-        <span className="bg-gradient-to-r from-[#457b9d] to-[#a8dadc] bg-clip-text text-transparent text-center">
+        <span className="bg-gradient-to-r from-[#457b9d] to-[#a8dadc] bg-clip-text text-transparent">
           {type} Post
         </span>
       </h1>
