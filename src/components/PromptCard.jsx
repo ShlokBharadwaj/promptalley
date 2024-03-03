@@ -46,7 +46,7 @@ const PromptCard = ({ prompt, handleTagClick, handleEdit, handleDelete }) => {
           </div>
         </div>
         <div
-          className="w-7 h-7 rounded-full bg-white/10 shadow-[inset_10px_-50px_94px_0_rgb(199,199,199,0.2)] backdrop-blur flex items-center justify-center cursor-pointer m-auto"
+          className="w-7 h-7 rounded-full bg-white/10 shadow-[inset_10px_-50px_94px_0_rgb(199,199,199,0.2)] backdrop-blur flex items-center justify-center cursor-pointer md:m-auto -my-1"
           onClick={handleCopy}
         >
           <FontAwesomeIcon
