@@ -7,11 +7,21 @@ import PromptCardList from "./PromptCardList";
 
 const Feed = () => {
 
+  const [searchText, setSearchText] = useState("");
   const [posts, setPosts] = useState([]);
 
-  const [searchText, setSearchText] = useState("");
-  const [searchTimeout, setSearchTimeout] = useState(null);
-  const [searchPosts, setSearchPosts] = useState(posts);
+  const handleSearchChange = (e) => {
+    setSearchText(e.target.value);
+  }
+
+  const filteredPosts = (searchText) => {
+    const regex = new RegExp(searchText, "i");
+    return posts.filter((post) =>
+      regex.test(post.prompt) ||
+      regex.test(post.creator.username) ||
+      (post.tags && post.tags.split(' ').some(tag => regex.test('#' + tag)))
+    );
+  };
 
   useEffect(() => {
     const fetchPosts = async () => {
@@ -19,34 +29,10 @@ const Feed = () => {
       const data = await response.json();
 
       setPosts(data);
-      setSearchPosts(data);
     }
 
     fetchPosts();
   }, []);
-
-  const filteredPosts = (searchText) => {
-    const regex = new RegExp(searchText, "i");
-    return posts.filter((post) =>
-      regex.test(post.prompt) ||
-      regex.test(post.creator.username) ||
-      (post.tags && post.tags.match(/#\S+|\S+/g).some(tag => regex.test(tag.startsWith('#') ? tag : '#' + tag)))
-    );
-  };
-
-  const handleSearchChange = (e) => {
-    clearTimeout(searchTimeout);
-    setSearchText(e.target.value);
-
-    setSearchTimeout(setTimeout(() => {
-      setSearchPosts(filteredPosts(e.target.value));
-    }, 500));
-  };
-
-  const handleTagClick = (tag) => {
-    setSearchText(tag);
-    setSearchPosts(filteredPosts(tag));
-  };
 
   return (
     <section className="mt-16 mx-auto w-full max-w-xl flex justify-center items-center flex-col gap-2">
@@ -62,8 +48,10 @@ const Feed = () => {
       </form>
 
       <PromptCardList
-        data={searchPosts}
-        handleTagClick={handleTagClick}
+        data={filteredPosts(searchText)}
+        handleTagClick={(tag) => {
+          setSearchText(tag);
+        }}
       />
     </section>
   )

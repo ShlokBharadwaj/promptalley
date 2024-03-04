@@ -58,14 +58,13 @@ const PromptCard = ({ prompt, handleTagClick, handleEdit, handleDelete }) => {
       <p className="my-4 font-satoshi text-sm text-start">{prompt.prompt}</p>
       <p
         className="font-inter text-sm bg-gradient-to-r from-[#eea689]  to-[#eb8b65] bg-clip-text text-transparent text-start"
-        onClick={() => handleTagClick && handleTagClick(prompt.tag)}
       >
-        {prompt.tag.match(/#\S+|\S+/g).map((tag, index) => (
+        {prompt.tag.split(' ').map((tag, index) => (
           <React.Fragment key={index}>
             <span
-              onClick={() => handleTagClick && handleTagClick(tag.startsWith('#') ? tag : '#' + tag)}
+              onClick={() => handleTagClick && handleTagClick('#' + tag)}
             >
-              {tag.startsWith('#') ? tag : '#' + tag}
+              {'#' + tag}
             </span>{' '}
           </React.Fragment>
         ))}
