@@ -7,13 +7,11 @@ import PromptCardList from "./PromptCardList";
 
 const Feed = () => {
 
-  const [searchText, setSearchText] = useState("");
   const [posts, setPosts] = useState([]);
-  const [filteredPosts, setFilteredPosts] = useState([]);
 
-  const handleSearchChange = (e) => {
-    setSearchText(e.target.value);
-  }
+  const [searchText, setSearchText] = useState("");
+  const [searchTimeout, setSearchTimeout] = useState(null);
+  const [searchPosts, setSearchPosts] = useState(posts);
 
   useEffect(() => {
     const fetchPosts = async () => {
@@ -21,21 +19,34 @@ const Feed = () => {
       const data = await response.json();
 
       setPosts(data);
+      setSearchPosts(data);
     }
 
     fetchPosts();
   }, []);
 
-  useEffect(() => {
-    console.log("Posts are: ", posts);
-    setFilteredPosts(
-      posts.filter(post =>
-        (post.tags && post.tags.some(tag => tag.toLowerCase().includes(searchText.toLowerCase()))) ||
-        (post.user && post.user.toLowerCase().includes(searchText.toLowerCase())) ||
-        (post.prompt && post.prompt.toLowerCase().includes(searchText.toLowerCase()))
-      )
+  const filteredPosts = (searchText) => {
+    const regex = new RegExp(searchText, "i");
+    return posts.filter((post) =>
+      regex.test(post.prompt) ||
+      regex.test(post.creator.username) ||
+      (post.tags && post.tags.match(/#\S+|\S+/g).some(tag => regex.test(tag.startsWith('#') ? tag : '#' + tag)))
     );
-  }, [searchText, posts]);
+  };
+
+  const handleSearchChange = (e) => {
+    clearTimeout(searchTimeout);
+    setSearchText(e.target.value);
+
+    setSearchTimeout(setTimeout(() => {
+      setSearchPosts(filteredPosts(e.target.value));
+    }, 500));
+  };
+
+  const handleTagClick = (tag) => {
+    setSearchText(tag);
+    setSearchPosts(filteredPosts(tag));
+  };
 
   return (
     <section className="mt-16 mx-auto w-full max-w-xl flex justify-center items-center flex-col gap-2">
@@ -51,10 +62,8 @@ const Feed = () => {
       </form>
 
       <PromptCardList
-        data={filteredPosts}
-        handleTagClick={(tag) => {
-          setSearchText(tag);
-        }}
+        data={searchPosts}
+        handleTagClick={handleTagClick}
       />
     </section>
   )

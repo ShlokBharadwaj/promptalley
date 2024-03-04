@@ -60,7 +60,15 @@ const PromptCard = ({ prompt, handleTagClick, handleEdit, handleDelete }) => {
         className="font-inter text-sm bg-gradient-to-r from-[#eea689]  to-[#eb8b65] bg-clip-text text-transparent text-start"
         onClick={() => handleTagClick && handleTagClick(prompt.tag)}
       >
-        {prompt.tag.split(' ').map(tag => tag.startsWith('#') ? tag : '#' + tag).join(' ')}
+        {prompt.tag.match(/#\S+|\S+/g).map((tag, index) => (
+          <React.Fragment key={index}>
+            <span
+              onClick={() => handleTagClick && handleTagClick(tag.startsWith('#') ? tag : '#' + tag)}
+            >
+              {tag.startsWith('#') ? tag : '#' + tag}
+            </span>{' '}
+          </React.Fragment>
+        ))}
       </p>
 
       {session?.user.id === prompt.creator._id && pathName === '/profile' && (
