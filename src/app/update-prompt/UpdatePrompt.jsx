@@ -48,10 +48,10 @@ const UpdatePrompt = () => {
             const res = await fetch(`/api/prompt/${promptId}`);
             // const text = await res.text();
             // console.log("The text data is: ", text);
-            if (!res.ok) {
-                console.log('Failed to fetch prompt', res.status);
-                return;
-            }
+            // if (!res.ok) {
+            //     console.log('Failed to fetch prompt', res.status);
+            //     return;
+            // }
             const data = await res.json();
 
             setPost({
