@@ -12,17 +12,15 @@ const Feed = () => {
 
   const handleSearchChange = (e) => {
     setSearchText(e.target.value);
-    console.log("Current searchText: ", e.target.value); // Log the current searchText
   }
 
   const filteredPosts = (searchText) => {
-    const regex = new RegExp(searchText.replace('#', ''), "i"); // remove '#' from searchText
+    const regex = new RegExp(searchText.replace('#', ''), "i");
     const filtered = posts.filter((post) =>
       regex.test(post.prompt) ||
       regex.test(post.creator.username) ||
-      (post.tag && post.tag.split(' ').some(tag => regex.test(tag))) // remove '#' from tag
+      (post.tag && post.tag.split(' ').some(tag => regex.test(tag)))
     );
-    console.log("Filtered posts: ", filtered); // Log the filtered posts
     return filtered;
   };
 
@@ -32,7 +30,6 @@ const Feed = () => {
       const data = await response.json();
 
       setPosts(data);
-      console.log("Posts fetched: ", data);
     }
 
     fetchPosts();
@@ -55,7 +52,6 @@ const Feed = () => {
         data={filteredPosts(searchText)}
         handleTagClick={(tag) => {
           setSearchText(tag)
-          console.log("Tag clicked: ", tag) // Log the tag clicked
         }}
       />
     </section>
