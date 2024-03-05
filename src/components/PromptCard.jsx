@@ -24,10 +24,16 @@ const PromptCard = ({ prompt, handleTagClick, handleEdit, handleDelete }) => {
     }, 1000);
   };
 
+  // console.log('PromptCard:', prompt);
+
+  const navigateToProfile = () => {
+    router.push(`/profile/${prompt.creator._id}`);
+  };
+
   return (
     <div className="flex-1 break-inside-avoid rounded-lg bg-clip-padding shadow-[inset_10px_-50px_94px_0_rgb(199,199,199,0.2)] backdrop-blur p-6 md:w-[360px] w-full h-fit text-center">
       <div className="flex justify-between items-start gap-5">
-        <div className="flex flex-1 justify-start items-center gap-3 cursor-pointer">
+        <div className="flex flex-1 justify-start items-center gap-3 cursor-pointer" onClick={navigateToProfile}>
           <Image
             src={prompt.creator.image}
             alt="profile image"
