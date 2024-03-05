@@ -12,15 +12,18 @@ const Feed = () => {
 
   const handleSearchChange = (e) => {
     setSearchText(e.target.value);
+    console.log("Current searchText: ", e.target.value); // Log the current searchText
   }
 
   const filteredPosts = (searchText) => {
-    const regex = new RegExp(searchText, "i");
-    return posts.filter((post) =>
+    const regex = new RegExp(searchText.replace('#', ''), "i"); // remove '#' from searchText
+    const filtered = posts.filter((post) =>
       regex.test(post.prompt) ||
       regex.test(post.creator.username) ||
-      (post.tags && post.tags.split(' ').some(tag => regex.test('#' + tag)))
+      (post.tag && post.tag.split(' ').some(tag => regex.test(tag))) // remove '#' from tag
     );
+    console.log("Filtered posts: ", filtered); // Log the filtered posts
+    return filtered;
   };
 
   useEffect(() => {
@@ -29,6 +32,7 @@ const Feed = () => {
       const data = await response.json();
 
       setPosts(data);
+      console.log("Posts fetched: ", data);
     }
 
     fetchPosts();
@@ -50,7 +54,8 @@ const Feed = () => {
       <PromptCardList
         data={filteredPosts(searchText)}
         handleTagClick={(tag) => {
-          setSearchText(tag);
+          setSearchText(tag)
+          console.log("Tag clicked: ", tag) // Log the tag clicked
         }}
       />
     </section>
