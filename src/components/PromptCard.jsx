@@ -69,6 +69,7 @@ const PromptCard = ({ prompt, handleTagClick, handleEdit, handleDelete }) => {
           <React.Fragment key={index}>
             <span
               onClick={() => handleTagClick && handleTagClick('#' + tag)}
+              className="cursor-pointer"
             >
               {'#' + tag}
             </span>{' '}
