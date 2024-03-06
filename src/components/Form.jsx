@@ -1,31 +1,6 @@
 import Link from "next/link";
 
-import cloudinary from "@/utils/cloudinary";
-
 const Form = ({ type, post, setPost, submitting, handleSubmit }) => {
-
-  const handleImageUpload = async (file) => {
-    try {
-      const formData = new FormData();
-      formData.append('file', file);
-      formData.append('upload_preset', promptalley_preset); // Replace with your Cloudinary upload preset
-      formData.append('cloud_name', process.env.CLOUDINARY_CLOUD_NAME);
-
-      const response = await fetch(`https://api.cloudinary.com/v1_1/${process.env.CLOUDINARY_CLOUD_NAME}/image/upload`, {
-        method: 'POST',
-        body: formData,
-      });
-
-      const data = await response.json();
-      const imageUrl = data.secure_url; // Get the secure URL of the uploaded image
-      // Store the imageUrl in your post data before submitting the form
-      setPost({ ...post, imageUrl });
-    } catch (error) {
-      console.error('Error uploading image:', error);
-    }
-  };
-
-
   return (
     <section className="w-full max-w-full flex flex-col justify-center items-center text-center">
       <h1 className="mt-5 text-5xl font-extrabold leading-[1.15] sm:text-6xl">
@@ -65,13 +40,6 @@ const Form = ({ type, post, setPost, submitting, handleSubmit }) => {
             className="w-full max-w-full p-2 mt-4 text-base rounded-md bg-transparent outline-none text-center ring-2 ring-[#a8dadc] ring-opacity-20"
             placeholder="Add a tag to your post without the # symbol. Separate tags with a space."
             required
-          />
-          <input
-            type="file"
-            accept="image/*"
-            onChange={(e) => handleImageUpload(e.target.files[0])}
-            className="w-full max-w-full p-2 mt-4 text-base rounded-md bg-transparent outline-none text-center ring-2 ring-[#a8dadc] ring-opacity-20"
-            // required
           />
         </label>
         <div className="flex justify-end items-center mx-3 mb-5 gap-4 mt-4">
