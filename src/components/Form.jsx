@@ -42,6 +42,18 @@ const Form = ({ type, post, setPost, submitting, handleSubmit }) => {
             required
           />
         </label>
+        <label className="mt-4">
+          <span className="font-satoshi font-semibold text-base">
+            Image&nbsp;
+            <span className="text-xs text-gray-500 ml-2">(optional)</span>
+          </span>
+          <input
+            type="file"
+            accept="image/*"
+            onChange={(e) => setPost({...post, image: e.target.files[0]})}
+            className="w-full max-w-full p-2 mt-4 text-base rounded-md bg-transparent outline-none text-center ring-2 ring-[#a8dadc] ring-opacity-20"
+          />
+        </label>
         <div className="flex justify-end items-center mx-3 mb-5 gap-4 mt-4">
           <Link href={"/"}
             className="text-sm"

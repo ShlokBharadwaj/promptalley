@@ -4,6 +4,10 @@ import { useRouter } from "next/navigation";
 
 import Form from "@/components/Form";
 
+import { storage } from "@/utils/firebase";
+import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
+import { v4 as uuidv4 } from "uuid";
+
 const CreatePrompt = () => {
 
   const router = useRouter();
@@ -13,18 +17,52 @@ const CreatePrompt = () => {
   const [post, setPost] = useState({
     prompt: '',
     tag: '',
+    image: null,
   });
+
+  const uploadImage = async () => {
+    const storageRef = ref(storage, `images/${uuidv4()}`);
+    const uploadTask = uploadBytesResumable(storageRef, post.image);
+
+    return new Promise((resolve, reject) => {
+      uploadTask.on('state_changed',
+        (snapshot) => {
+          const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+          console.log('Upload is ' + progress + '% done');
+        },
+        (error) => {
+          reject(error);
+          console.error('An error occurred while uploading the image:', error);
+        },
+        () => {
+          getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
+            resolve(downloadURL);
+          });
+        }
+      );
+    });
+  };
 
   const createPrompt = async (e) => {
     e.preventDefault();
     setSubmitting(true);
+
     try {
+
+      let newPost = { ...post };
+
+      if (post.image) {
+        const downloadURL = await uploadImage();
+        newPost.image = downloadURL;
+      }
+
       const response = await fetch('/api/prompt/new', {
         method: 'POST',
         body: JSON.stringify({
           prompt: post.prompt,
           userId: session?.user.id,
           tag: post.tag,
+          image: newPost.image,
         }),
       });
 

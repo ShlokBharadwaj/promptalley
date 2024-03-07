@@ -11,6 +11,7 @@ const UpdatePrompt = () => {
     const [post, setPost] = useState({
         prompt: '',
         tag: '',
+        image: null,
     });
     const searchParams = useSearchParams();
     const promptId = searchParams.get('id');
