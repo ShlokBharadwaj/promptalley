@@ -1,5 +1,6 @@
 import { connectToDatabase } from '@/utils/database';
 import Prompt from "@/models/prompt";
+import deleteImage from "@/utils/deleteImage";
 
 export const GET = async (req, { params }) => {
     try {
@@ -57,6 +58,14 @@ export const PATCH = async (req, { params }) => {
 export const DELETE = async (req, { params }) => {
     try {
         await connectToDatabase();
+
+        const prompt = await Prompt.findById(params.id);
+
+        console.log("URL for image is: ", prompt.image)
+
+        if (prompt.image) {
+            await deleteImage(prompt.image);
+        }
 
         await Prompt.findByIdAndDelete(params.id);
 
