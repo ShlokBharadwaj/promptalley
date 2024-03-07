@@ -3,6 +3,8 @@ import { useRouter, useSearchParams } from "next/navigation";
 
 import Form from "@/components/Form";
 
+import uploadImage from "@/utils/uploadImage";
+
 const UpdatePrompt = () => {
 
     const router = useRouter();
@@ -25,13 +27,17 @@ const UpdatePrompt = () => {
             return alert('Prompt not found');
         }
 
+        let newPost = { ...post };
+
+        if (newPost.image) {
+            const downloadURL = await uploadImage(newPost.image);
+            newPost.image = downloadURL;
+        }
+
         try {
             const response = await fetch(`/api/prompt/${promptId}`, {
                 method: 'PATCH',
-                body: JSON.stringify({
-                    prompt: post.prompt,
-                    tag: post.tag,
-                }),
+                body: JSON.stringify(newPost),
             });
 
             if (response.ok) {
@@ -58,6 +64,7 @@ const UpdatePrompt = () => {
             setPost({
                 prompt: data.prompt,
                 tag: data.tag,
+                image: data.image,
             });
         }
 
