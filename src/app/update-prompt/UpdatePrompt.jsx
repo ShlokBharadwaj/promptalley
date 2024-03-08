@@ -28,8 +28,9 @@ const UpdatePrompt = () => {
         }
 
         let newPost = { ...post };
+        console.log('The new post is: ', newPost);
 
-        if (newPost.image) {
+        if (newPost.image instanceof File) {
             const downloadURL = await uploadImage(newPost.image);
             newPost.image = downloadURL;
         }
