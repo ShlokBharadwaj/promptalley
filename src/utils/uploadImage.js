@@ -3,6 +3,12 @@ import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
 import { v4 as uuidv4 } from "uuid";
 
 const uploadImage = async (imageFile) => {
+
+    if (imageFile.size > 2 * 1024 * 1024) {
+        alert('Image size must be less than 2MB');
+        return;
+    };
+
     const storageRef = ref(storage, `images/${uuidv4()}`);
     const uploadTask = uploadBytesResumable(storageRef, imageFile);
 
