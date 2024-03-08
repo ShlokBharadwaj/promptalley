@@ -23,20 +23,20 @@ const UpdatePrompt = () => {
     const updatePrompt = async (e) => {
         e.preventDefault();
         setSubmitting(true);
-
-        if (!promptId) {
-            return alert('Prompt not found');
-        }
-
-        let newPost = { ...post };
-        // console.log('The new post is: ', newPost);
-
-        if (newPost.image instanceof File) {
-            const downloadURL = await uploadImage(newPost.image);
-            newPost.image = downloadURL;
-        }
-
+        
         try {
+            if (!promptId) {
+                return alert('Prompt not found');
+            }
+
+            let newPost = { ...post };
+            // console.log('The new post is: ', newPost);
+
+            if (newPost.image instanceof File) {
+                const downloadURL = await uploadImage(newPost.image);
+                newPost.image = downloadURL;
+            }
+
             const response = await fetch(`/api/prompt/${promptId}`, {
                 method: 'PATCH',
                 body: JSON.stringify({ ...newPost, oldImage }),

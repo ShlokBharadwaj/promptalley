@@ -23,7 +23,6 @@ const CreatePrompt = () => {
     setSubmitting(true);
 
     try {
-
       let newPost = { ...post };
 
       if (post.image) {
