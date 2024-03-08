@@ -28,7 +28,7 @@ const PromptCard = ({ prompt, handleTagClick, handleEdit, handleDelete }) => {
     router.push(`/profile/${prompt.creator._id}`);
   };
   
-  console.log('PromptCard:', prompt);
+  // console.log('PromptCard:', prompt);
   
   return (
     <div className="flex-1 break-inside-avoid rounded-lg bg-clip-padding shadow-[inset_10px_-50px_94px_0_rgb(199,199,199,0.2)] backdrop-blur p-6 md:w-[360px] w-full h-fit text-center">

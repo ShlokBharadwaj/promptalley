@@ -26,7 +26,7 @@ export const GET = async (req, { params }) => {
 }
 
 export const PATCH = async (req, { params }) => {
-    const { prompt, tag, image } = await req.json();
+    const { prompt, tag, image, oldImage } = await req.json();
 
     try {
         await connectToDatabase();
@@ -41,7 +41,13 @@ export const PATCH = async (req, { params }) => {
 
         existingPrompt.prompt = prompt;
         existingPrompt.tag = tag;
-        existingPrompt.image = image;
+
+        console.log("Old image is server: ", oldImage);
+
+        if (image && oldImage && image !== oldImage) {
+            await deleteImage(oldImage);
+            existingPrompt.image = image;
+        }
 
         await existingPrompt.save();
 
@@ -49,6 +55,7 @@ export const PATCH = async (req, { params }) => {
             status: 200,
         })
     } catch (error) {
+        console.error("Error in PATCH method:", error);
         return new Response("Failed to update prompt", {
             status: 500,
         })

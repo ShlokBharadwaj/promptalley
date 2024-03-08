@@ -15,6 +15,7 @@ const UpdatePrompt = () => {
         tag: '',
         image: null,
     });
+    const [oldImage, setOldImage] = useState(null);
     const searchParams = useSearchParams();
     const promptId = searchParams.get('id');
     // console.log(promptId);
@@ -38,7 +39,7 @@ const UpdatePrompt = () => {
         try {
             const response = await fetch(`/api/prompt/${promptId}`, {
                 method: 'PATCH',
-                body: JSON.stringify(newPost),
+                body: JSON.stringify({ ...newPost, oldImage }),
             });
 
             if (response.ok) {
@@ -67,6 +68,8 @@ const UpdatePrompt = () => {
                 tag: data.tag,
                 image: data.image,
             });
+            console.log("Data image is: ", data.image);
+            setOldImage(data.image);
         }
 
         if (promptId) {
