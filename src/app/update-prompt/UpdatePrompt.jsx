@@ -23,7 +23,13 @@ const UpdatePrompt = () => {
     const updatePrompt = async (e) => {
         e.preventDefault();
         setSubmitting(true);
-        
+
+        if (post.image && !post.image.type.startsWith('image/')) {
+            alert('Please select an image file');
+            setSubmitting(false);
+            return;
+        }
+
         try {
             if (!promptId) {
                 return alert('Prompt not found');

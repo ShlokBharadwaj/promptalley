@@ -50,7 +50,14 @@ const Form = ({ type, post, setPost, submitting, handleSubmit }) => {
           <input
             type="file"
             accept="image/*"
-            onChange={(e) => setPost({...post, image: e.target.files[0]})}
+            onChange={(e) => {
+              const file = e.target.files[0];
+              if (!file.type.startsWith('image/')) {
+                alert('Please select an image file');
+                return;
+              }
+              setPost({ ...post, image: file });
+            }}
             className="w-full max-w-full p-2 mt-4 text-base rounded-md bg-transparent outline-none text-center ring-2 ring-[#a8dadc] ring-opacity-20"
           />
         </label>
