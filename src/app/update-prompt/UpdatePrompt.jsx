@@ -29,7 +29,7 @@ const UpdatePrompt = () => {
         }
 
         let newPost = { ...post };
-        console.log('The new post is: ', newPost);
+        // console.log('The new post is: ', newPost);
 
         if (newPost.image instanceof File) {
             const downloadURL = await uploadImage(newPost.image);
@@ -68,7 +68,7 @@ const UpdatePrompt = () => {
                 tag: data.tag,
                 image: data.image,
             });
-            console.log("Data image is: ", data.image);
+            // console.log("Data image is: ", data.image);
             setOldImage(data.image);
         }
 

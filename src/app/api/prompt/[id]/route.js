@@ -18,7 +18,7 @@ export const GET = async (req, { params }) => {
             status: 200,
         })
     } catch (error) {
-        console.log("The error for GET request is: ", error);
+        // console.log("The error for GET request is: ", error);
         return new Response("Failed to fetch prompts", {
             status: 500,
         })
@@ -42,7 +42,7 @@ export const PATCH = async (req, { params }) => {
         existingPrompt.prompt = prompt;
         existingPrompt.tag = tag;
 
-        console.log("Old image is server: ", oldImage);
+        // console.log("Old image is server: ", oldImage);
 
         if (image && oldImage && image !== oldImage) {
             await deleteImage(oldImage);
@@ -68,7 +68,7 @@ export const DELETE = async (req, { params }) => {
 
         const prompt = await Prompt.findById(params.id);
 
-        console.log("URL for image is: ", prompt.image)
+        // console.log("URL for image is: ", prompt.image)
 
         if (prompt.image) {
             await deleteImage(prompt.image);
