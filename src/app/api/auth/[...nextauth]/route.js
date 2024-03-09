@@ -30,7 +30,7 @@ const handler = NextAuth({
         async signIn({ profile }) {
             try {
                 await connectToDatabase();
-                console.log("Connected to database");
+                // console.log("Connected to database");
 
                 const userExists = await User.findOne({ email: profile.email });
 
@@ -45,7 +45,7 @@ const handler = NextAuth({
 
                 return true;
             } catch (error) {
-                console.log("Error connecting to database", error);
+                // console.log("Error connecting to database", error);
                 return false;
             }
         }
