@@ -1,36 +1,118 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# PromptAlley
 
-## Getting Started
+PromptAlley is a platform for users to find and share prompts. Ever wondered seeing an AI-generated image and thought, "I wonder what prompt they used to get that result?" Worry no more. With PromptAlley, users can share both text or image-based prompts.
 
-First, run the development server:
+## Live Demo
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+You can view the live demo of PromptAlley [here](https://promptalley-web.netlify.app/).
+
+## Screenshot
+
+![screenshot](/public/assets/images/promptalley-screenshot..png)
+
+## Technologies Used
+
+This project is built with the following technologies:
+
+- **Next.js**: A React framework used for building full-stack applications.
+- **MongoDB Atlas**: Used for storing user details and user prompts.
+- **NextAuth.js**: Provides authentication support, enabling users to log in with Google and GitHub.
+- **Firebase**: Used for storing user-uploaded images corresponding to a prompt.
+- **Vercel**: Used for deploying the application.
+- **Tailwind CSS**: A utility-first CSS framework used for styling the application.
+
+## Installing promptalley
+
+To install promptalley, follow these steps:
+
+1. Clone the repository:
+   ```
+   git clone git@github.com:ShlokBharadwaj/promptalley.git
+   ```
+2. Navigate to the project directory:
+   ```
+   cd promptalley
+   ```
+3. Install dependencies:
+   ```
+    npm i
+    ```
+4. Start the application:
+   ```
+   npm run dev
+   ```
+5. Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+
+## Using promptalley
+
+To use promptalley, follow these steps:
+
+<!-- Create a .env files with keys, take .env.sample for reference-->
+
+1. Go to the root of the project and create a `.env` file.
+
+```
+touch .env
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+2. Navigate to `.env.example` and copy the contents to `.env`.
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+```
+cp .env.example .env
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+3. Replace the values of the keys with your own values.
 
-## Learn More
+*Hint*: _Follow the directions in the `.env.example` to know what values to change and where to find those values._
 
-To learn more about Next.js, take a look at the following resources:
+## Contributing to promptalley
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+To contribute to promptalley, follow these steps:
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+1. **Fork this repository.**
+    - Click the 'Fork' button on the top right corner of this repository and wait for the process to complete. This will create a copy of this repository in your account.
 
-## Deploy on Vercel
+2. **Clone the forked repository to your local machine.**
+    - Go to your GitHub account, open the forked repository, click on the 'Code' button and then click the 'copy to clipboard' icon to get the clone command.
+    - Open a terminal and run the following git command:
+      ```
+      git clone "url you just copied"
+      ```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+3. **Create a new branch where you'll make your changes.**
+    - Navigate to the cloned directory.
+    - Create a new branch using the `git checkout` command:
+      ```
+      git checkout -b <branch_name>
+      ```
+    - For example:
+      ```
+        git checkout -b feature
+        ```
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+
+4. **Make your changes and commit them.**
+    - Make the changes in the code.
+    - Use the `git add` command to add the files you've changed:
+      ```
+      git add .
+      ```
+    - Use the `git commit` command to save your changes locally:
+      ```
+      git commit -m '<commit_message>'
+      ```
+
+5. **Push your changes to your forked repository.**
+    - Use the `git push` command to upload your changes to your forked repository on GitHub:
+      ```
+      git push origin <branch_name>
+      ```
+
+6. **Create a pull request.**
+    - Go to your GitHub account, open the forked repository, click on the 'Pull request' button, and create a new pull request.
+
+Please ensure your pull request adheres to our coding conventions and is consistent with the project's style. If you're unsure about anything, feel free to ask!
+
+## License
+
+This project is licensed under the GNU GENERAL PUBLIC LICENSE - see the [LICENSE](./LICENSE) file for details.
