@@ -4,7 +4,7 @@ PromptAlley is a platform for users to find and share prompts. Ever wondered see
 
 ## Live Demo
 
-You can view the live demo of PromptAlley [here](https://promptalley-web.netlify.app/).
+You can view the live demo of PromptAlley [here](https://promptalley.vercel.app/).
 
 ## Screenshot
 
