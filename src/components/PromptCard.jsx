@@ -67,8 +67,9 @@ const PromptCard = ({ prompt, handleTagClick, handleEdit, handleDelete }) => {
           <Image
             src={prompt.image}
             alt="prompt image"
-            layout="fill"
-            objectFit="cover"
+            fill
+            style={{ objectFit: "cover" }}
+            sizes={"100%"}
           />
         </div>
       )}
