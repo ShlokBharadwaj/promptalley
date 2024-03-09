@@ -24,7 +24,7 @@ const UpdatePrompt = () => {
         e.preventDefault();
         setSubmitting(true);
 
-        if (post.image && !post.image.type.startsWith('image/')) {
+        if (post.image instanceof File && !post.image.type.startsWith('image/')) {
             alert('Please select an image file');
             setSubmitting(false);
             return;
