@@ -1,6 +1,6 @@
-# PromptAlley
+# Promptalley
 
-PromptAlley is a platform for users to find and share prompts. Ever wondered seeing an AI-generated image and thought, "I wonder what prompt they used to get that result?" Worry no more. With PromptAlley, users can share both text or image-based prompts.
+PromptAlley is a platform for users to find and share prompts. Ever wondered seeing an AI-generated image and thought, "I wonder what prompt they used to get that result?" Worry no more. With Promptalley, users can share both text or image-based prompts.
 
 ## Live Demo
 
@@ -8,7 +8,7 @@ You can view the live demo of PromptAlley [here](https://promptalley.vercel.app/
 
 ## Screenshot
 
-![screenshot](/public/assets/images/promptalley-screenshot..png)
+![screenshot](/public/assets/images/promptalley-screenshot.png)
 
 ## Technologies Used
 
