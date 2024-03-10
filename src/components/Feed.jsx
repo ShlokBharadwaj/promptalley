@@ -5,10 +5,22 @@ import { useState, useEffect } from "react";
 import PromptCard from "./PromptCard";
 import PromptCardList from "./PromptCardList";
 
-const Feed = () => {
+export async function getStaticProps() {
+  const response = await fetch("/api/prompt");
+  const posts = await response.json();
+
+  return {
+    props: {
+      initialPosts: posts,
+    },
+    revalidate: 1,
+  };
+}
+
+const Feed = ({ initialPosts }) => {
 
   const [searchText, setSearchText] = useState("");
-  const [posts, setPosts] = useState([]);
+  const [posts, setPosts] = useState(initialPosts);
 
   const handleSearchChange = (e) => {
     setSearchText(e.target.value);
@@ -16,7 +28,7 @@ const Feed = () => {
 
   const filteredPosts = (searchText) => {
     const regex = new RegExp(searchText.replace('#', ''), "i");
-    const filtered = posts.filter((post) =>
+    const filtered = posts?.filter((post) =>
       regex.test(post.prompt) ||
       regex.test(post.creator.username) ||
       (post.tag && post.tag.split(' ').some(tag => regex.test(tag)))
