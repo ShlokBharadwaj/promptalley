@@ -7,6 +7,9 @@ export const GET = async (req, res) => {
 
         const prompts = await Prompt.find({}).populate("creator");
 
+        // Set the Cache-Control header to no-store in the response, to prevent caching.
+        res.setHeader('Cache-Control', 'no-store');
+
         return new Response(JSON.stringify(prompts), {
             status: 200,
         })
