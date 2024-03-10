@@ -1,6 +1,7 @@
 import { connectToDatabase } from '@/utils/database';
 import Prompt from "@/models/prompt";
 import deleteImage from "@/utils/deleteImage";
+import User from "@/models/user";
 
 export const GET = async (req, { params }) => {
     try {
